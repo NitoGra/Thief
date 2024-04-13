@@ -15,7 +15,6 @@ public class Patroul : MonoBehaviour
 	private int _halfCircleCount;
 	private int _maxHalfCircle;
 
-
 	public void Start()
 	{
 		int skipPoints = 1;
