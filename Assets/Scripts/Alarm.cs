@@ -4,9 +4,9 @@ public class Alarm : MonoBehaviour
 {
 	private bool _isAlarmOn;
 	private AudioSource _audio;
-	private float _volumeChange = 0.0003f;
-	private float _volumeMultiplier = 2;
-	private float _alarmVolume = 0.002f;
+	private float _volumeDecreases = 0.0008f;
+	private float _volumeIncreases = 0.008f;
+	private float _startVolume = 0.0002f;
 
 	public void Start()
 	{
@@ -17,15 +17,15 @@ public class Alarm : MonoBehaviour
 	public void Update()
 	{
 		if (_isAlarmOn)
-			_audio.volume *= _volumeMultiplier;
+			_audio.volume += _volumeIncreases;
 		else
-			_audio.volume -= _volumeChange;
+			_audio.volume -= _volumeDecreases;
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
 		_audio.Play();
-		_audio.volume = _alarmVolume;
+		_audio.volume = _startVolume;
 		_isAlarmOn = !_isAlarmOn;
 	}
 
