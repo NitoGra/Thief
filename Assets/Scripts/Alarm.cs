@@ -4,7 +4,7 @@ public class Alarm : MonoBehaviour
 {
 	private bool _isAlarmOn;
 	private AudioSource _audio;
-	private float _volumeDecreases = 0.0008f;
+	private float _volumeDecreases = 0.008f;
 	private float _volumeIncreases = 0.008f;
 	private float _startVolume = 0.0002f;
 
