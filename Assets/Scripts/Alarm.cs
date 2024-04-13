@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
-
     private bool _isAlarmOn;
     private AudioSource _audio;
 	private float _volumeChange = 0.0003f;
