@@ -6,6 +6,7 @@ public class Patroul : MonoBehaviour
 {
 	[SerializeField] private float _speed;
 	[SerializeField] private Transform _allPointsStorage;
+	[SerializeField] private int _maxHalfCircle;
 
 	private Animator _animator;
 	private List<Transform> _allPoints;
@@ -13,13 +14,12 @@ public class Patroul : MonoBehaviour
 	private int _index;
 	private bool _moveForward;
 	private int _halfCircleCount;
-	private int _maxHalfCircle;
 
 	public void Start()
 	{
 		int skipPoints = 1;
 		int speed = 2;
-		_maxHalfCircle = 1;
+		_maxHalfCircle--;
 		_animator = GetComponent<Animator>();
 		_allPoints = _allPointsStorage.GetComponentsInChildren<Transform>().Skip(skipPoints).ToList();
 		_index = 1;

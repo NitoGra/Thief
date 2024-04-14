@@ -123,73 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &179886303
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 179886304}
-  - component: {fileID: 179886305}
-  - component: {fileID: 179886306}
-  m_Layer: 0
-  m_Name: Trigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &179886304
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179886303}
-  m_LocalRotation: {x: -0, y: -0.4989562, z: -0, w: 0.8666272}
-  m_LocalPosition: {x: -3.28, y: 0.28710052, z: -1.9099998}
-  m_LocalScale: {x: 1.7226924, y: 0.37679708, z: 0.027689224}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 1728527943}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: -59.862, z: 0}
---- !u!65 &179886305
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179886303}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 5.3643723, z: 1}
-  m_Center: {x: 0, y: 2.1821861, z: 0}
---- !u!114 &179886306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179886303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9795d02b53a6ad6498ccbcfde3d29950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alarm: {fileID: 1728527945}
 --- !u!1 &213460922
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _allPointsStorage: {fileID: 347102425}
+  _maxHalfCircle: 4
 --- !u!54 &511676264
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -906,6 +840,7 @@ GameObject:
   - component: {fileID: 1728527940}
   - component: {fileID: 1728527944}
   - component: {fileID: 1728527945}
+  - component: {fileID: 1728527946}
   m_Layer: 0
   m_Name: Alarm system
   m_TagString: Untagged
@@ -945,8 +880,7 @@ Transform:
   m_LocalPosition: {x: -0.43, y: 0.17762, z: -2.43}
   m_LocalScale: {x: 0.65, y: 1.0218718, z: 0.65}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 179886304}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -961,7 +895,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5099034b434d3fe4bad21b9985f04b51, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
   Loop: 1
@@ -1058,6 +992,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d53ee882e10bd2c4694408cd9b2ffb6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1728527946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728527939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a5f56b26b50b98479391803d4b6c697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _alarm: {fileID: 1728527945}
 --- !u!1 &1890647814
 GameObject:
   m_ObjectHideFlags: 0
