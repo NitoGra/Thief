@@ -53,7 +53,7 @@ public class Patroul : MonoBehaviour
 		if (indexCount == _allPoints.Count || _index <= 0)
 		{
 			_halfCircleCount++;
-			_moveForward = !_moveForward;
+			_moveForward = _moveForward == true ? false : true; //_moveForward = !_moveForward; 
 		}
 
 		if (_moveForward)
