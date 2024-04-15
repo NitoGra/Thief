@@ -37,6 +37,9 @@ public class Alarm : MonoBehaviour
 
 			if (_audio.volume == targetVolume)
 			{
+				if(_audio.volume == 0)
+					_audio.Stop();
+
 				StopCoroutine(_coroutine);
 				break;
 			}
