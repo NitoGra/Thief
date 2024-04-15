@@ -8,7 +8,6 @@ public class Alarm : MonoBehaviour
 	private float _volumeDecreases = 0.8f;
 	private float _volumeIncreases = 0.8f;
 	private float _startVolume = 0.002f;
-	private float _delay = 0.001f;
 	private float _sirenOn = 1;
 	private float _sirenOff = 0;
 	private Coroutine _coroutine;
@@ -22,7 +21,7 @@ public class Alarm : MonoBehaviour
 	public void TurnOffSiren()
 	{
 		_isAlarmOn = false;
-		_coroutine = StartCoroutine(SoundChange(_delay, _sirenOff));
+		_coroutine = StartCoroutine(SoundChange(_sirenOff));
 	}
 
 	public void TurnOnSiren()
@@ -30,30 +29,26 @@ public class Alarm : MonoBehaviour
 		_audio.Play();
 		_audio.volume = _startVolume;
 		_isAlarmOn = true;
-		_coroutine = StartCoroutine(SoundChange(_delay, _sirenOn));
+		_coroutine = StartCoroutine(SoundChange(_sirenOn));
 	}
 
-	private IEnumerator SoundChange(float delay, float targetVolume)
+	private IEnumerator SoundChange(float targetVolume)
 	{
-		var wait = new WaitForSeconds(delay);
 		bool isContinue = true;
 
 		while (isContinue)
 		{
+			_audio.volume = Mathf.MoveTowards(_audio.volume, targetVolume, Time.deltaTime);
+
 			if (_audio.volume == targetVolume)
 			{
 				StopCoroutine(_coroutine);
 				break;
 			}
 
-			if (_isAlarmOn)
-				_audio.volume += _volumeIncreases * Time.deltaTime;
-			else
-				_audio.volume -= _volumeDecreases * Time.deltaTime;
-
-			yield return wait;
+			yield return null;
 		}
 
-		yield return wait;
+		//yield return null;
 	}
 }
