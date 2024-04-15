@@ -27,7 +27,7 @@ public class Patroul : MonoBehaviour
 		string animationHashName = "Speed";
 		int snimationSpeed = 2;
 		_animator = GetComponent<Animator>();
-		_speedHash  = Animator.StringToHash(animationHashName);
+		_speedHash = Animator.StringToHash(animationHashName);
 		_animator.SetInteger(_speedHash, snimationSpeed);
 	}
 

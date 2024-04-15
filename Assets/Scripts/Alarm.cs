@@ -3,10 +3,7 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
-	private bool _isAlarmOn = false;
 	private AudioSource _audio;
-	private float _volumeDecreases = 0.8f;
-	private float _volumeIncreases = 0.8f;
 	private float _startVolume = 0.002f;
 	private float _sirenOn = 1;
 	private float _sirenOff = 0;
@@ -20,7 +17,6 @@ public class Alarm : MonoBehaviour
 
 	public void TurnOffSiren()
 	{
-		_isAlarmOn = false;
 		_coroutine = StartCoroutine(SoundChange(_sirenOff));
 	}
 
@@ -28,7 +24,6 @@ public class Alarm : MonoBehaviour
 	{
 		_audio.Play();
 		_audio.volume = _startVolume;
-		_isAlarmOn = true;
 		_coroutine = StartCoroutine(SoundChange(_sirenOn));
 	}
 
@@ -48,7 +43,5 @@ public class Alarm : MonoBehaviour
 
 			yield return null;
 		}
-
-		//yield return null;
 	}
 }

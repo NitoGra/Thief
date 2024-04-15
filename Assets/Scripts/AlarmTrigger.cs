@@ -6,7 +6,7 @@ public class AlarmTrigger : MonoBehaviour
 
 	private void OnTriggerEnter(Collider thief)
 	{
-		if(thief.TryGetComponent<Patroul>(out Patroul patroul))
+		if (thief.TryGetComponent<Patroul>(out Patroul patroul))
 			_alarm.TurnOnSiren();
 	}
 
