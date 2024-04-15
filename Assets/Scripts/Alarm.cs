@@ -9,39 +9,42 @@ public class Alarm : MonoBehaviour
 	private float _volumeIncreases = 0.8f;
 	private float _startVolume = 0.002f;
 	private float _delay = 0.001f;
+	private float _sirenOn = 1;
+	private float _sirenOff = 0;
+	private Coroutine _coroutine;
 
 	public void Start()
 	{
 		_audio = GetComponent<AudioSource>();
-		_audio.enabled = false;
+		_audio.Stop();
 		_isAlarmOn = false;
 	}
 
-	public void ThiefLose()
+	public void TurnOffSiren()
 	{
 		_isAlarmOn = false;
+		_coroutine = StartCoroutine(SoundChange(_delay, _sirenOff));
 	}
 
-	public void ThiefFound()
+	public void TurnOnSiren()
 	{
-		_audio.enabled = true;
+		_audio.Play();
 		_audio.volume = _startVolume;
 		_isAlarmOn = true;
-		StartCoroutine(SoundChange(_delay));
+		_coroutine = StartCoroutine(SoundChange(_delay, _sirenOn));
 	}
 
-	private IEnumerator SoundChange(float delay)
+	private IEnumerator SoundChange(float delay, float targetVolume)
 	{
 		var wait = new WaitForSeconds(delay);
 		bool isContinue = true;
 
 		while (isContinue)
 		{
-			if(_audio.volume == 0)
+			if (_audio.volume == targetVolume)
 			{
-				isContinue = false;
-				_audio.enabled = false;
-				continue;
+				StopCoroutine(_coroutine);
+				break;
 			}
 
 			if (_isAlarmOn)
@@ -51,5 +54,7 @@ public class Alarm : MonoBehaviour
 
 			yield return wait;
 		}
+
+		yield return wait;
 	}
 }

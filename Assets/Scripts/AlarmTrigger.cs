@@ -4,13 +4,15 @@ public class AlarmTrigger : MonoBehaviour
 {
 	[SerializeField] private Alarm _alarm;
 
-	private void OnTriggerEnter(Collider other)
+	private void OnTriggerEnter(Collider thief)
 	{
-		_alarm.ThiefFound();
+		if(thief.TryGetComponent<Patroul>(out Patroul patroul))
+			_alarm.TurnOnSiren();
 	}
 
-	private void OnTriggerExit(Collider other)
+	private void OnTriggerExit(Collider thief)
 	{
-		_alarm.ThiefLose();
+		if (thief.TryGetComponent<Patroul>(out Patroul patroul))
+			_alarm.TurnOffSiren();
 	}
 }

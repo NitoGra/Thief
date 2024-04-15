@@ -11,29 +11,31 @@ public class Patroul : MonoBehaviour
 	private Animator _animator;
 	private List<Transform> _allPoints;
 	private Transform _point;
-	private int _index;
-	private bool _moveForward;
+	private int _index = 1;
+	private bool _moveForward = true;
 	private int _halfCircleCount;
+	private int _speedHash;
 
 	public void Start()
 	{
 		int skipPoints = 1;
-		int speed = 2;
 		_maxHalfCircle--;
-		_animator = GetComponent<Animator>();
 		_allPoints = _allPointsStorage.GetComponentsInChildren<Transform>().Skip(skipPoints).ToList();
-		_index = 1;
 		_point = _allPoints[_index];
 		transform.LookAt(_point.position);
-		_moveForward = true;
-		_animator.SetInteger("Speed", speed);
+
+		string animationHashName = "Speed";
+		int snimationSpeed = 2;
+		_animator = GetComponent<Animator>();
+		_speedHash  = Animator.StringToHash(animationHashName);
+		_animator.SetInteger(_speedHash, snimationSpeed);
 	}
 
 	public void Update()
 	{
 		if (_halfCircleCount > _maxHalfCircle)
 		{
-			_animator.SetInteger("Speed", 0);
+			_animator.SetInteger(_speedHash, 0);
 			return;
 		}
 
@@ -53,7 +55,7 @@ public class Patroul : MonoBehaviour
 		if (indexCount == _allPoints.Count || _index <= 0)
 		{
 			_halfCircleCount++;
-			_moveForward = _moveForward == true ? false : true; //_moveForward = !_moveForward;
+			_moveForward = _moveForward == false;
 		}
 
 		if (_moveForward)
