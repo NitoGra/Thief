@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
-	private bool _isAlarmOn;
+	private bool _isAlarmOn = false;
 	private AudioSource _audio;
 	private float _volumeDecreases = 0.8f;
 	private float _volumeIncreases = 0.8f;
@@ -17,7 +17,6 @@ public class Alarm : MonoBehaviour
 	{
 		_audio = GetComponent<AudioSource>();
 		_audio.Stop();
-		_isAlarmOn = false;
 	}
 
 	public void TurnOffSiren()
