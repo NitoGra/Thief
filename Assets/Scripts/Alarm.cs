@@ -7,7 +7,6 @@ public class Alarm : MonoBehaviour
 	private float _sirenStartVolume = 0.002f;
 	private float _sirenOnVolume = 1;
 	private float _sirenOffVolume = 0;
-	private bool _isCorutineWorking = false;
 	private Coroutine _coroutine;
 
 	public void Start()
@@ -18,22 +17,20 @@ public class Alarm : MonoBehaviour
 
 	public void TurnOffSiren()
 	{
-		if (_isCorutineWorking)
-			StopAllCoroutines();
+		if (_coroutine != null)
+			StopCoroutine(_coroutine);
 
 		_coroutine = StartCoroutine(SoundChange(_sirenOffVolume));
-		_isCorutineWorking = true;
 	}
 
 	public void TurnOnSiren()
 	{
-		if (_isCorutineWorking)
-			StopAllCoroutines();
+		if (_coroutine != null)
+			StopCoroutine(_coroutine);
 
 		_audio.Play();
 		_audio.volume = _sirenStartVolume;
 		_coroutine = StartCoroutine(SoundChange(_sirenOnVolume));
-		_isCorutineWorking = true;
 	}
 
 	private IEnumerator SoundChange(float targetVolume)
@@ -46,7 +43,5 @@ public class Alarm : MonoBehaviour
 
 		if (_audio.volume == _sirenOffVolume)
 			_audio.Stop();
-
-		_isCorutineWorking = false;
 	}
 }
