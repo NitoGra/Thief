@@ -4,9 +4,10 @@ using UnityEngine;
 public class Alarm : MonoBehaviour
 {
 	private AudioSource _audio;
-	private float _startVolume = 0.002f;
-	private float _sirenOn = 1;
-	private float _sirenOff = 0;
+	private float _sirenStartVolume = 0.002f;
+	private float _sirenOnVolume = 1;
+	private float _sirenOffVolume = 0;
+	private bool _isCorutineWorking = false;
 	private Coroutine _coroutine;
 
 	public void Start()
@@ -17,34 +18,35 @@ public class Alarm : MonoBehaviour
 
 	public void TurnOffSiren()
 	{
-		_coroutine = StartCoroutine(SoundChange(_sirenOff));
+		if (_isCorutineWorking)
+			StopAllCoroutines();
+
+		_coroutine = StartCoroutine(SoundChange(_sirenOffVolume));
+		_isCorutineWorking = true;
 	}
 
 	public void TurnOnSiren()
 	{
+		if (_isCorutineWorking)
+			StopAllCoroutines();
+
 		_audio.Play();
-		_audio.volume = _startVolume;
-		_coroutine = StartCoroutine(SoundChange(_sirenOn));
+		_audio.volume = _sirenStartVolume;
+		_coroutine = StartCoroutine(SoundChange(_sirenOnVolume));
+		_isCorutineWorking = true;
 	}
 
 	private IEnumerator SoundChange(float targetVolume)
 	{
-		bool isContinue = true;
-
-		while (isContinue)
+		while (_audio.volume != targetVolume)
 		{
 			_audio.volume = Mathf.MoveTowards(_audio.volume, targetVolume, Time.deltaTime);
-
-			if (_audio.volume == targetVolume)
-			{
-				if(_audio.volume == _sirenOff)
-					_audio.Stop();
-
-				StopCoroutine(_coroutine);
-				break;
-			}
-
 			yield return null;
 		}
+
+		if (_audio.volume == _sirenOffVolume)
+			_audio.Stop();
+
+		_isCorutineWorking = false;
 	}
 }
